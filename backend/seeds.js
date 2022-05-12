@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 require("./models/User");
 require("./models/Item");
+require("./models/Comment");
 
 const crypto = require("crypto");
 
