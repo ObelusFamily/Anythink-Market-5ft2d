@@ -9,6 +9,7 @@ const crypto = require("crypto");
 
 const User = mongoose.model("User");
 const Item = mongoose.model("Item");
+const Comment = mongoose.model("Comment");
 
 async function seedUser() {
   const username = crypto.randomUUID().split("-")[0];
@@ -42,14 +43,24 @@ async function seedItem(userId) {
   }
 }
 
+async function seedComment(userId, item) {
+  const comment = new Comment();
+  comment.body = "Hello World";
+  comment.seller = userId;
+  comment.item = item;
+
+  await comment.save();
+}
+
 async function populate() {
   await User.deleteMany({});
   await Item.deleteMany({});
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     const userId = await seedUser();
-    await seedItem(userId);
+    const item = await seedItem(userId);
+    await seedComment(userId, item);
   }
-  console.log("seeded users and items");
+  console.log("seeded users, items and comments");
 }
 
 (async () => {
