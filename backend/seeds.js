@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 require("./models/User");
 require("./models/Item");
-require("./models/Comment");
 
 const crypto = require("crypto");
 
@@ -43,6 +42,8 @@ async function seedItem(userId) {
 }
 
 async function populate() {
+  await User.deleteMany({});
+  await Item.deleteMany({});
   for (let i = 0; i < 10; i++) {
     const userId = await seedUser();
     await seedItem(userId);
