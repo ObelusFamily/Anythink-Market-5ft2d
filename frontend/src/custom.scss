@@ -59,3 +59,9 @@ body {
 .user-info {
   min-width: 800px;
 }
+
+@media (min-width: 800px) {
+  .user-info {
+    min-width: 800px;
+  }
+}
