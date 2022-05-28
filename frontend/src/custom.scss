@@ -56,6 +56,11 @@ body {
   -webkit-box-orient: vertical;
 }
 
+#search-box {
+  width: 280px;
+  margin: 0 4px;
+}
+
 @media (min-width: 800px) {
   .user-info {
     min-width: 800px;
