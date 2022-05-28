@@ -1,13 +1,22 @@
 import React from "react";
 import logo from "../../imgs/logo.png";
 
-const Banner = () => {
+const Banner = ({ title, setTitle }) => {
   return (
     <div className="banner text-white">
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
           <span id="get-part">A place to get</span>
+          <input
+            value={title}
+            type="text"
+            id="search-box"
+            placeholder="What is it that you truly desire?"
+            onChange={(e) => {
+              return setTitle(e.target.value);
+            }}
+          />
           <span> the cool stuff.</span>
         </div>
       </div>
