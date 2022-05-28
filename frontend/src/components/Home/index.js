@@ -26,34 +26,31 @@ const mapDispatchToProps = (dispatch) => ({
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
 });
 
-class Home extends React.Component {
-  componentWillMount() {
-    const tab = "all";
-    const itemsPromise = agent.Items.all;
+function Home(props) {
+  let { token, tags, onLoad, onUnload, onClickTag } = props;
 
-    this.props.onLoad(
+  const [title, setTitle] = React.useState("");
+
+  React.useEffect(() => {
+    const tab = token ? "feed" : "all";
+    const itemsPromise = token ? agent.Items.feed : agent.Items.all;
+
+    onLoad(
       tab,
       itemsPromise,
-      Promise.all([agent.Tags.getAll(), itemsPromise()])
+      Promise.all([agent.Tags.getAll(), itemsPromise(title)])
     );
-  }
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
+    return () => onUnload();
+  }, [onLoad, onUnload, title, token]);
 
-  render() {
-    return (
-      <div className="home-page">
-        <Banner />
-
-        <div className="container page">
-          <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
-          <MainView />
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div className="home">
+      <Banner title={title} setTitle={setTitle} />
+      <MainView />
+      <Tags tags={tags} onClickTag={onClickTag} />
+    </div>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
