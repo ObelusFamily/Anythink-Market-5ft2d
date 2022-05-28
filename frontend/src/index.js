@@ -6,7 +6,7 @@ import { store, history } from "./store";
 
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
-
+// n
 import App from "./components/App";
 
 ReactDOM.render(
@@ -20,3 +20,4 @@ ReactDOM.render(
 
   document.getElementById("root")
 );
+//aa

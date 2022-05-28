@@ -3,11 +3,11 @@ import _superagent from "superagent";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000/api"
-    : process.env.REACT_APP_BACKEND_URL;
-
+// const API_ROOT =
+//   process.env.NODE_ENV !== "production"
+//     ? "http://localhost:3000/api"
+//     : process.env.REACT_APP_BACKEND_URL;
+const API_ROOT = process.env.REACT_APP_BACKEND_URL;
 const encode = encodeURIComponent;
 const responseBody = (res) => res.body;
 
@@ -51,7 +51,8 @@ const Tags = {
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (item) => Object.assign({}, item, { slug: undefined });
 const Items = {
-  all: (page) => requests.get(`/items?${limit(1000, page)}`),
+  all: (page, title) =>
+    requests.get(`/items?${limit(1000, page)}&title=${title}`),
   bySeller: (seller, page) =>
     requests.get(`/items?seller=${encode(seller)}&${limit(500, page)}`),
   byTag: (tag, page) =>
