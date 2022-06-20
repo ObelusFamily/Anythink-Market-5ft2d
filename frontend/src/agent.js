@@ -61,7 +61,7 @@ const Items = {
   favorite: (slug) => requests.post(`/items/${slug}/favorite`),
   favoritedBy: (seller, page) =>
     requests.get(`/items?favorited=${encode(seller)}&${limit(500, page)}`),
-  feed: () => requests.get("/items/feed?limit=10&offset=0"),
+  feed: (title) => requests.get(`/items/feed?limit=10&offset=0&title=${title}`),
   get: (slug) => requests.get(`/items/${slug}`),
   unfavorite: (slug) => requests.del(`/items/${slug}/favorite`),
   update: (item) =>

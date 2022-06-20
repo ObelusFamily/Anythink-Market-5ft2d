@@ -26,29 +26,31 @@ const mapDispatchToProps = (dispatch) => ({
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
 });
 
-function Home(props) {
-  let { token, tags, onLoad, onUnload, onClickTag } = props;
+function Home({ onLoad, onUnload, tags, onClickTag }) {
+  const tab = "all";
+  const itemsPromise = agent.Items.all;
 
   const [title, setTitle] = React.useState("");
+  const [itemNotFound, setItemNotFound] = React.useState(false);
 
   React.useEffect(() => {
-    const tab = token ? "feed" : "all";
-    const itemsPromise = token ? agent.Items.feed : agent.Items.all;
-
     onLoad(
       tab,
       itemsPromise,
-      Promise.all([agent.Tags.getAll(), itemsPromise(title)])
+      Promise.all([agent.Tags.getAll(), itemsPromise(0, title)])
     );
 
     return () => onUnload();
-  }, [onLoad, onUnload, title, token]);
+  }, [title, itemsPromise, onLoad, onUnload]);
 
   return (
-    <div className="home">
-      <Banner title={title} setTitle={setTitle} />
-      <MainView />
-      <Tags tags={tags} onClickTag={onClickTag} />
+    <div className="home-page">
+      <Banner title={title} setTitle={setTitle} itemNotFound={itemNotFound} />
+
+      <div className="container page">
+        <Tags tags={tags} onClickTag={onClickTag} />
+        <MainView title={title} setItemNotFound={setItemNotFound} />
+      </div>
     </div>
   );
 }

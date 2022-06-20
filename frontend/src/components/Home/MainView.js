@@ -70,6 +70,20 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const MainView = (props) => {
+  console.log("adasdadas", props.items);
+  if (
+    props.items !== undefined &&
+    props.items.length === 0 &&
+    props.title.length > 1
+  ) {
+    props.setItemNotFound(true);
+    return (
+      <div id="empty">
+        <h3>No results found for - {props.title}</h3>
+      </div>
+    );
+  }
+  props.setItemNotFound(false);
   return (
     <div>
       <div className="feed-toggle">
@@ -87,6 +101,7 @@ const MainView = (props) => {
       </div>
 
       <ItemList
+        title={props.title}
         pager={props.pager}
         items={props.items}
         loading={props.loading}
