@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const MainView = (props) => {
-  if (props.items.length === 0) {
+  if (props.items.length === 0 && props.title.length > 1) {
     props.setItemNotFound(true);
     return (
       <div id="empty">

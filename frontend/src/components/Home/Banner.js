@@ -9,7 +9,7 @@ const Banner = ({ title, setTitle, itemNotFound }) => {
         <div>
           <span id="get-part">A place to get</span>
           <input
-            value={itemNotFound ? "" : title}
+            value={itemNotFound ? null : title}
             type="text"
             id="search-box"
             placeholder="What is it that you truly desire?"
