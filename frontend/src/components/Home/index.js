@@ -31,6 +31,7 @@ function Home({ onLoad, onUnload, tags, onClickTag }) {
   const itemsPromise = agent.Items.all;
 
   const [title, setTitle] = React.useState("");
+  const [itemNotFound, setItemNotFound] = React.useState(false);
 
   React.useEffect(() => {
     onLoad(
@@ -44,11 +45,11 @@ function Home({ onLoad, onUnload, tags, onClickTag }) {
 
   return (
     <div className="home-page">
-      <Banner title={title} setTitle={setTitle} />
+      <Banner title={title} setTitle={setTitle} itemNotFound={itemNotFound} />
 
       <div className="container page">
         <Tags tags={tags} onClickTag={onClickTag} />
-        <MainView title={title} />
+        <MainView title={title} setItemNotFound={setItemNotFound} />
       </div>
     </div>
   );

@@ -7,14 +7,6 @@ const ItemList = (props) => {
     return <div className="py-4">Loading...</div>;
   }
 
-  if (props.items.length === 0) {
-    return (
-      <div id="empty">
-        <h3>No results found for - {props.title}</h3>
-      </div>
-    );
-  }
-
   return (
     <div className="container py-2">
       <div className="row">
