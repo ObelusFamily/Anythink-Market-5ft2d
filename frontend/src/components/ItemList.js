@@ -8,7 +8,11 @@ const ItemList = (props) => {
   }
 
   if (props.items.length === 0) {
-    return <div id="empty">Not Found</div>;
+    return (
+      <div id="empty">
+        <h3>No results found for - {props.title}</h3>
+      </div>
+    );
   }
 
   return (

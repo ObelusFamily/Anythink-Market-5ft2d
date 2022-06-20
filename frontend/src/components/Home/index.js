@@ -48,7 +48,7 @@ function Home({ onLoad, onUnload, tags, onClickTag }) {
 
       <div className="container page">
         <Tags tags={tags} onClickTag={onClickTag} />
-        <MainView />
+        <MainView title={title} />
       </div>
     </div>
   );
