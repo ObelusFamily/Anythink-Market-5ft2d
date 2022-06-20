@@ -8,8 +8,9 @@ const Banner = ({ title, setTitle, itemNotFound }) => {
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span id="get-part">A place to </span>
-          <span onClick={() => setShowBanner(!showBanner)}>get</span>
+          <span id="get-part" onClick={() => setShowBanner(!showBanner)}>
+            A place to get
+          </span>
           {showBanner ? (
             <input
               value={itemNotFound === true ? "" : title}
